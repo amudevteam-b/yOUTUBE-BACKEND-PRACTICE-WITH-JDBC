@@ -1,78 +1,149 @@
-# 🎥 YouTubeBackend – Java + SQLite Mini Clone
+# YouTube Backend
 
-> A retro-styled terminal simulation of YouTube’s basic features – register, watch, like, share, subscribe – all running on Java with an SQLite backend. Because why just watch YouTube when you can *code* one?
+A Java-based backend application for a YouTube-like platform with a modern JavaFX interface.
 
-## 🚀 Features
+## Features
 
-- 👤 User registration
-- 📺 Watch a placeholder video (with ASCII art because vibes)
-- 👍 Like, 🔁 Share, and ✅ Subscribe functionalities
-- 📊 Real-time counts of likes, shares, and subscribers
-- 💾 SQLite database storage
+- User Registration
+- Video Viewing Interface
+- Like/Share/Subscribe Functionality
+- Real-time Stats Display
+- Modern JavaFX UI
+- SQLite Database Integration
 
-## 🛠️ Technologies Used
+## Prerequisites
 
-- **Java**
-- **SQLite**
-- JDBC (Java Database Connectivity)
-- Terminal I/O (Scanner class)
+- JDK 23 or later
+- Maven 3.9.9
+- JavaFX 24.0.1
+- SQLite
 
-## 🧠 How It Works
+## Installation
 
-When you run the program:
-1. You’re prompted to register, watch a video, or exit.
-2. If you watch the video, a simulated screen displays with subscriber/like/share counters.
-3. You can only interact (like, share, sub) *after* registering.
-4. All interactions are logged to the `youtube.db` SQLite database.
+1. **Install JDK 23:**
+   - Download from: https://www.oracle.com/java/technologies/downloads/
+   - Set JAVA_HOME environment variable
 
-## 📂 Database Schema
+2. **Install Maven:**
+   - Download from: https://maven.apache.org/download.cgi
+   - Extract to `C:\maven`
+   - Set environment variables:
+     ```
+     MAVEN_HOME=C:\maven
+     Path=%MAVEN_HOME%\bin;%Path%
+     ```
 
-### Table: `members`
-| Column   | Type    | Description         |
-|----------|---------|---------------------|
-| no       | INT     | Auto-increment ID   |
-| user_id  | INT     | Unique user ID      |
-| name     | TEXT    | Username            |
+3. **Install JavaFX:**
+   - Download from: https://gluonhq.com/products/javafx/
+   - Extract to `C:\Program Files\Java\javafx-sdk-24.0.1`
+   - Set environment variable:
+     ```
+     JAVAFX_HOME=C:\Program Files\Java\javafx-sdk-24.0.1
+     ```
 
-### Table: `video`
-| Column       | Type | Description                            |
-|--------------|------|----------------------------------------|
-| no           | INT  | Auto-increment video interaction ID    |
-| user_id      | INT  | ID of the user who interacted          |
-| statusid     | INT  | 1 for like, 2 for dislike              |
-| statusS_id   | INT  | 1 if subscribed                        |
-| statusR_id   | INT  | 1 if shared                            |
+4. **Install SQLite:**
+   - Download from: https://www.sqlite.org/download.html
+   - Create database at: `C:/SQLite/youtube.db`
 
-> ⚠️ Note: All data gets appended—no user login system or duplicate checks implemented. This is just a backend simulation, not a secure system.
+## Project Structure
 
-## 🧪 How to Run
+```
+youtube-backend/
+├── pom.xml
+└── src/
+    └── main/
+        └── java/
+            └── com/
+                └── youtube/
+                    ├── YoutubeBackend.java
+                    └── YoutubeFX.java
+```
 
-1. Make sure you have Java installed.
-2. Download and install [SQLite](https://www.sqlite.org/download.html).
-3. Create a database file at `C:/SQLite/youtube.db`.
-4. Create the required tables manually in the DB (see schema above).
-5. Compile and run the Java file:
+## Running the Application
 
-```bash
-javac YoutubeBackend.java
-java YoutubeBackend
-📝 Notes
-This is a terminal-based simulation meant for educational purposes.
+1. **Build the project:**
+   ```bash
+   mvn clean install
+   ```
 
-The video section is just ASCII art – but you could extend this to actually play media or link to a GUI.
+2. **Run the application:**
+   ```bash
+   mvn javafx:run
+   ```
 
-There’s no user authentication, session handling, or error-proofing – that’s your next challenge 😉
+## Features
 
-✨ Future Upgrades
- Add login and user authentication
+### Main Screen
+- Clean, modern interface
+- Three main buttons: Register, Watch Video, Exit
+- YouTube-style red color scheme
 
- Improve DB structure with foreign keys
+### Register Screen
+- Simple registration form
+- Name input field
+- Register button
+- Success/error messages
 
- Add GUI (JavaFX or Swing maybe?)
+### Video Screen
+- Video player frame
+- Stats panel (subscribers, likes, shares)
+- Action buttons (like, share, subscribe)
+- Real-time updates
 
- Implement comment and search features
+## Database Schema
 
+### Members Table
+- no (INTEGER)
+- name (TEXT)
+- user_id (INTEGER)
 
-📣 Author
-Built by Yobil – Coding, dreaming, and directing The~~AI 😉
+### Video Table
+- no (INTEGER)
+- user_id (INTEGER)
+- statusid (INTEGER)
+- statusS_id (INTEGER)
+- statusR_id (INTEGER)
 
+## Troubleshooting
+
+### Common Issues
+
+1. **Maven not found:**
+   - Verify MAVEN_HOME is set correctly
+   - Check Path variable includes Maven bin directory
+
+2. **JavaFX not found:**
+   - Verify JAVAFX_HOME is set correctly
+   - Check JavaFX dependencies in pom.xml
+
+3. **Database connection error:**
+   - Verify SQLite is installed
+   - Check database path in code
+   - Ensure database file exists
+
+## Development
+
+### Adding New Features
+1. Create new methods in YoutubeBackend.java
+2. Add UI components in YoutubeFX.java
+3. Update database schema if needed
+
+### Code Style
+- Follow Java coding conventions
+- Use meaningful variable names
+- Add comments for complex logic
+- Handle exceptions properly
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Author
+
+Eyobw
+
+## Acknowledgments
+
+- JavaFX for the UI framework
+- SQLite for the database
+- Maven for dependency management
